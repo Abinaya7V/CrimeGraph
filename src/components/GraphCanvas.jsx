@@ -10,7 +10,7 @@ const TYPE_COLORS = {
   account: "#7048E8",
 };
 
-export default function GraphCanvas({ onSelectElement, highlightId }) {
+export default function GraphCanvas({ onSelectElement, highlightId, currentDay = 10 }) {
   const containerRef = useRef(null);
   const cyRef = useRef(null);
 
@@ -90,11 +90,24 @@ export default function GraphCanvas({ onSelectElement, highlightId }) {
     return () => cy.destroy();
   }, [onSelectElement]);
 
-  // Handle search highlight
+  // Handle search highlight and temporal filter
   useEffect(() => {
     const cy = cyRef.current;
     if (!cy) return;
+    
     cy.elements().removeClass("faded highlighted");
+
+    // Apply temporal filter
+    if (currentDay < 10) {
+      const visibleEdges = cy.edges().filter(e => {
+        const t = e.data('timestamp');
+        return t != null && t <= currentDay;
+      });
+      const visibleEles = visibleEdges.union(visibleEdges.connectedNodes());
+      cy.elements().difference(visibleEles).addClass("faded");
+    }
+
+    // Apply search highlight (overrides temporal fading)
     if (highlightId) {
       const target = cy.getElementById(highlightId);
       if (target && target.length) {
@@ -105,7 +118,7 @@ export default function GraphCanvas({ onSelectElement, highlightId }) {
         cy.animate({ center: { eles: target }, zoom: 1.4 }, { duration: 400 });
       }
     }
-  }, [highlightId]);
+  }, [highlightId, currentDay]);
 
   return <div ref={containerRef} style={{ width: "100%", height: "100%" }} />;
 }

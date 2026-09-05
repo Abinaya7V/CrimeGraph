@@ -3,6 +3,7 @@ import GraphCanvas from "./components/GraphCanvas.jsx";
 import Legend from "./components/Legend.jsx";
 import DashboardHome from "./components/DashboardHome.jsx";
 import AuditLogView from "./components/AuditLogView.jsx";
+import TimelineScrubber from "./components/TimelineScrubber.jsx";
 import { nodes, stats } from "./data.js";
 import "./App.css";
 
@@ -12,6 +13,7 @@ export default function App() {
   const [query, setQuery] = useState("");
   const [highlightId, setHighlightId] = useState(null);
   const [showAuditLog, setShowAuditLog] = useState(false);
+  const [currentDay, setCurrentDay] = useState(10);
 
   const matches = useMemo(() => {
     if (!query.trim()) return [];
@@ -70,8 +72,9 @@ export default function App() {
       ) : (
         <div className="main-area">
           <div className="graph-wrap">
-            <GraphCanvas onSelectElement={setSelected} highlightId={highlightId} />
+            <GraphCanvas onSelectElement={setSelected} highlightId={highlightId} currentDay={currentDay} />
             <Legend />
+            <TimelineScrubber currentDay={currentDay} onChangeDay={setCurrentDay} maxDay={10} />
           </div>
 
           <aside className={`inspector ${selected ? "open" : ""}`}>

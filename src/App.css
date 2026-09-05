@@ -616,3 +616,57 @@ body {
   border-radius: 4px;
   letter-spacing: 0.5px;
 }
+
+/* ---------- Timeline Scrubber ---------- */
+.timeline-scrubber {
+  position: absolute;
+  bottom: 24px;
+  left: 24px;
+  right: 24px;
+  background: white;
+  border-radius: 12px;
+  padding: 16px 24px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  border: 1px solid #e2e8f0;
+  z-index: 10;
+}
+
+.btn-play {
+  background: #1a365d;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 8px 16px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  min-width: 80px;
+  transition: background 0.2s;
+}
+
+.btn-play:hover {
+  background: #2a4365;
+}
+
+.scrubber-track {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.scrubber-label {
+  font-weight: 600;
+  color: #2d3748;
+  font-size: 14px;
+  min-width: 50px;
+}
+
+.scrubber-input {
+  flex: 1;
+  cursor: pointer;
+  accent-color: #1a365d;
+}
