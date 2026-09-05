@@ -1,6 +1,4 @@
-import { auditLog } from "../data.js";
-
-export default function AuditLogView({ onClose }) {
+export default function AuditLogView({ onClose, auditLog }) {
   return (
     <div className="modal-overlay" onClick={onClose}>
       <div className="modal-content" onClick={(e) => e.stopPropagation()}>

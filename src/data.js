@@ -4,52 +4,65 @@
 export const nodes = [
   // Persons
   { data: { id: "p_ravi", label: "Ravi Kumar", type: "person", aliasOf: null,
-    confidence: null, bridge: false,
-    evidence: "Case A (Chennai FIR #2291): Named as suspect who contacted victim's family." } },
+    confidence: null, bridge: false, connectionCount: 4, clusterId: "Cluster-TN", caseId: "FIR-2291", district: "Chennai",
+    evidence: "Case A (Chennai FIR #2291): Named as suspect who contacted victim's family.",
+    justification: "Ravi Kumar is a central suspect in the Chennai trafficking case, directly implicated in contacting the victim's family." } },
   { data: { id: "p_suresh", label: "Suresh M.", type: "person", aliasOf: null,
-    confidence: null, bridge: true,
-    evidence: "Case B (Mumbai CDR log): Frequent contact with two separate phone clusters. Flagged as a structural bridge connecting the Tamil Nadu/Maharashtra group to a separate Kerala-based cluster." } },
+    confidence: null, bridge: true, connectionCount: 3, clusterId: "Cluster-MH/KL", caseId: "Multiple", district: "Mumbai",
+    evidence: "Case B (Mumbai CDR log): Frequent contact with two separate phone clusters. Flagged as a structural bridge connecting the Tamil Nadu/Maharashtra group to a separate Kerala-based cluster.",
+    justification: "Suresh M. is the only individual connecting the Tamil Nadu cluster (Cases A, C) to the separately-filed Kerala cluster (Case D), based on phone records dated 12–24 March." } },
   { data: { id: "p_anita", label: "Anita R.", type: "person", aliasOf: null,
-    confidence: null, bridge: false,
-    evidence: "Case C (Bengaluru transaction record): Linked to Account XXXX7743." } },
+    confidence: null, bridge: false, connectionCount: 1, clusterId: "Cluster-TN", caseId: "FIN-7743", district: "Bengaluru",
+    evidence: "Case C (Bengaluru transaction record): Linked to Account XXXX7743.",
+    justification: "Anita R. is directly linked to an account flagged for rapid multi-account transfers associated with the Bengaluru trafficking ring." } },
   { data: { id: "p_deepak", label: "Deepak S.", type: "person", aliasOf: null,
-    confidence: null, bridge: false,
-    evidence: "Case D (Kerala FIR #1187): Named contact for Phone_96xxx341." } },
+    confidence: null, bridge: false, connectionCount: 2, clusterId: "Cluster-KL", caseId: "FIR-1187", district: "Kerala",
+    evidence: "Case D (Kerala FIR #1187): Named contact for Phone_96xxx341.",
+    justification: "Deepak S. was identified in a Kerala FIR and is registered to a phone number in direct contact with the bridge node, Suresh M." } },
   { data: { id: "p_unknown", label: "Unknown_X", type: "person", aliasOf: null,
-    confidence: null, bridge: false,
-    evidence: "Identity unconfirmed. Appears in Mumbai Node surveillance log, linked to Suresh M. cluster." } },
+    confidence: null, bridge: false, connectionCount: 2, clusterId: "Cluster-KL", caseId: "FIR-1187", district: "Mumbai",
+    evidence: "Identity unconfirmed. Appears in Mumbai Node surveillance log, linked to Suresh M. cluster.",
+    justification: "An unidentified individual repeatedly observed alongside Deepak S. at the Mumbai Node, suggesting involvement in transit operations." } },
 
   // Phones
   { data: { id: "ph_1", label: "Ph: 98xxx122", type: "phone", aliasOf: null,
-    confidence: null, bridge: false,
-    evidence: "Case A CDR: Registered contact of Ravi Kumar, called victim's family twice on 14 Mar." } },
+    confidence: null, bridge: false, caseId: "FIR-2291", district: "Chennai",
+    evidence: "Case A CDR: Registered contact of Ravi Kumar, called victim's family twice on 14 Mar.",
+    justification: "This phone number was used by Ravi Kumar to contact the victim's family, establishing a direct link to the abduction." } },
   { data: { id: "ph_2", label: "Ph: 97xxx899", type: "phone", aliasOf: null,
-    confidence: null, bridge: false,
-    evidence: "Case B CDR (Mumbai cybercrime unit): 14 calls exchanged with Ph:98xxx122 over 3 weeks." } },
+    confidence: null, bridge: false, caseId: "CDR-MH-4471", district: "Mumbai",
+    evidence: "Case B CDR (Mumbai cybercrime unit): 14 calls exchanged with Ph:98xxx122 over 3 weeks.",
+    justification: "This number shows an unusually high volume of communication with Ravi Kumar's known device, indicating coordination." } },
   { data: { id: "ph_3", label: "Ph: 96xxx341", type: "phone", aliasOf: null,
-    confidence: null, bridge: false,
-    evidence: "Case D CDR (Kerala): Registered to Suresh M., in contact with Deepak S." } },
+    confidence: null, bridge: false, caseId: "FIR-1187", district: "Kerala",
+    evidence: "Case D CDR (Kerala): Registered to Suresh M., in contact with Deepak S.",
+    justification: "Registered to Suresh M., this number connects the primary suspect to the Kerala-based operative Deepak S." } },
 
   // Vehicle
   { data: { id: "v_1", label: "Veh: TN-09-AB-4521", type: "vehicle", aliasOf: null,
-    confidence: null, bridge: false,
-    evidence: "Surveillance report (Case C): Vehicle seen near Transit Point on 3 occasions in April." } },
+    confidence: null, bridge: false, caseId: "FIN-7743", district: "Bengaluru",
+    evidence: "Surveillance report (Case C): Vehicle seen near Transit Point on 3 occasions in April.",
+    justification: "This vehicle is associated with Ravi Kumar and was spotted multiple times at a known trafficking transit point." } },
 
   // Locations
   { data: { id: "l_chennai", label: "Chennai Hub", type: "location", aliasOf: null,
-    confidence: null, bridge: false,
-    evidence: "Case A FIR filing location." } },
+    confidence: null, bridge: false, caseId: "FIR-2291", district: "Chennai",
+    evidence: "Case A FIR filing location.",
+    justification: "Chennai serves as the origin point for Case A, establishing the geographic base for Ravi Kumar's operations." } },
   { data: { id: "l_transit", label: "Transit Point", type: "location", aliasOf: null,
-    confidence: null, bridge: false,
-    evidence: "Surveillance report: known trafficking transit point, Tamil Nadu-Karnataka border." } },
+    confidence: null, bridge: false, caseId: "FIN-7743", district: "Tamil Nadu Border",
+    evidence: "Surveillance report: known trafficking transit point, Tamil Nadu-Karnataka border.",
+    justification: "A strategic cross-border transit location where the suspect vehicle was repeatedly identified." } },
   { data: { id: "l_mumbai", label: "Mumbai Node", type: "location", aliasOf: null,
-    confidence: null, bridge: false,
-    evidence: "Case B: location tagged in CDR tower-triangulation data." } },
+    confidence: null, bridge: false, caseId: "CDR-MH-4471", district: "Mumbai",
+    evidence: "Case B: location tagged in CDR tower-triangulation data.",
+    justification: "Mumbai is the central operational hub for Suresh M., verified by cell tower triangulation during key communications." } },
 
   // Account
   { data: { id: "a_1", label: "Acc: XXXX7743", type: "account", aliasOf: null,
-    confidence: null, bridge: false,
-    evidence: "Case C transaction record: Rapid multi-account transfer flagged by anomaly detection (Isolation Forest, 48hr window)." } },
+    confidence: null, bridge: false, caseId: "FIN-7743", district: "Bengaluru",
+    evidence: "Case C transaction record: Rapid multi-account transfer flagged by anomaly detection (Isolation Forest, 48hr window).",
+    justification: "This account exhibits anomalous financial activity typical of laundering operations, moving funds directly to Anita R." } },
 ];
 
 export const edges = [
@@ -101,4 +114,31 @@ export const auditLog = [
   { time: "10:04:47", investigator: "Insp. R. Sharma", action: "Viewed evidence: Case A FIR #2291", hash: "3b9d...77f0" },
   { time: "10:15:02", investigator: "Insp. P. Nair", action: "Flagged bridge node: Suresh M.", hash: "e12c...4a8b" },
   { time: "10:16:31", investigator: "Insp. P. Nair", action: "Exported report: Case A-D cluster", hash: "90aa...1d3f" },
+];
+
+export const leads = [
+  {
+    id: "lead_1",
+    title: "Potential cross-case bridge",
+    type: "bridge",
+    summary: "System detected communication bridging the Tamil Nadu and Kerala clusters. Review Suresh M.'s connections to determine if this is relevant.",
+    relatedNodeId: "p_suresh",
+    status: "new"
+  },
+  {
+    id: "lead_2",
+    title: "Possible alias match",
+    type: "alias",
+    summary: "R. Kumar appears in Case A with a similar phone number to Ravi K. in Case B. Could these records refer to the same individual?",
+    relatedNodeId: "p_ravi",
+    status: "new"
+  },
+  {
+    id: "lead_3",
+    title: "Unusual transfer volume",
+    type: "anomaly",
+    summary: "This account shows rapid transfers outside its normal operating range over a 48hr window. Worth reviewing to see if it warrants further financial audit.",
+    relatedNodeId: "a_1",
+    status: "new"
+  }
 ];
