@@ -1,0 +1,5 @@
+fastapi
+uvicorn
+spacy
+# Run this after installing to get the model:
+# python -m spacy download en_core_web_sm

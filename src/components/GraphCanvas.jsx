@@ -124,6 +124,8 @@ export default function GraphCanvas({ onSelectElement, highlightId, highlightClu
     });
 
     cy.on("tap", "node, edge", (evt) => {
+      evt.preventDefault();
+      evt.stopPropagation();
       const ele = evt.target;
       onSelectElement(ele.data());
     });

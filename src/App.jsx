@@ -9,6 +9,7 @@ import LeadsPanel from "./components/LeadsPanel.jsx";
 import ConfidenceLegendNote from "./components/ConfidenceLegendNote.jsx";
 import ConfidenceBadge from "./components/ConfidenceBadge.jsx";
 import { nodes, stats, leads as initialLeads, aliasMatches, auditLog as initialAuditLog } from "./data.js";
+import LiveExtractionDemo from "./components/LiveExtractionDemo.jsx";
 import "./App.css";
 
 export default function App() {
@@ -108,11 +109,17 @@ export default function App() {
           <div className="stat"><span className="stat-num">{stats.totalEntities}</span><span className="stat-label">Entities</span></div>
           <div className="stat stat-alert"><span className="stat-num">{stats.flaggedIndividuals}</span><span className="stat-label">Flagged</span></div>
           <button className="btn-audit" onClick={() => setShowAuditLog(true)}>View Audit Log</button>
+          <button className="btn-audit" style={{marginLeft: "8px", backgroundColor: "#4f46e5", color: "white", border: "none"}} onClick={() => setView("extraction")}>Live Extraction</button>
         </div>
       </header>
 
       {view === "home" ? (
         <DashboardHome onOpenGraph={() => setView("graph")} />
+      ) : view === "extraction" ? (
+        <div style={{ padding: "20px", width: "100%", overflowY: "auto", backgroundColor: "#fff" }}>
+           <button onClick={() => setView("home")} style={{ marginBottom: "20px", padding: "8px 16px", cursor: "pointer", background: "#f3f4f6", border: "1px solid #d1d5db", borderRadius: "4px" }}>← Back to Home</button>
+           <LiveExtractionDemo />
+        </div>
       ) : (
         <div className="main-area">
           <div className="graph-wrap">
@@ -158,7 +165,7 @@ export default function App() {
 
                 <div className="evidence-block">
                   <div className="evidence-label">Supporting Record</div>
-                  <p className="evidence-text">{selected.evidence || selected.label}</p>
+                  <p className="evidence-text">{selected.evidence || "No linked source record available for this entity"}</p>
                 </div>
 
                 <div className="hash-badge">
